@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>OAuth2-flexible-fork</id>
+    <version>1.0.0.1</version>
+    <title>OAuth2-flexible-fork</title>
+    <authors>doctornick42</authors>
+    <owners>doctornick42</owners>
+    <projectUrl>https://github.com/doctornick42/OAuth2</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Little fork of a https://github.com/titarenko/OAuth2 (https://www.nuget.org/packages/OAuth2/) lib to allow to the contributors to implements their own clients more flexible.</description>
+    <releaseNotes>
+		Remove the method that takes a list of all types from all currently available assemblies. 
+		Instead of it - create RegisterClient and UnregisterClient methods in the AuthorizationRoot class to control the list of available OAuth clients
+	</releaseNotes>
+    <copyright>Copyright 2016</copyright>
+    <tags></tags>
+	<dependencies>
+        <dependency id="RestSharp" version="105.2.3" />
+        <dependency id="Newtonsoft.Json" version="8.0.3" />
+    </dependencies>
+  </metadata>
+</package>
