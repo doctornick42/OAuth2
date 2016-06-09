@@ -12,7 +12,7 @@ namespace OAuth2.Client.Impl
     /// </summary>
     public class OdnoklassnikiClient : OAuth2Client
     {
-        private readonly IClientConfiguration _configuration;
+        protected readonly IClientConfiguration _configuration;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="OdnoklassnikiClient"/> class.

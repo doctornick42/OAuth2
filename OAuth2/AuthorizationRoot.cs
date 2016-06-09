@@ -10,8 +10,8 @@ namespace OAuth2
 {
     public class AuthorizationRoot
     {
-        private readonly IRequestFactory _requestFactory;
-        private readonly OAuth2ConfigurationSection _configurationSection;
+        protected readonly IRequestFactory _requestFactory;
+        protected readonly OAuth2ConfigurationSection _configurationSection;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AuthorizationRoot" /> class.

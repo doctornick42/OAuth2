@@ -16,12 +16,12 @@ namespace OAuth2.Client
     /// </summary>
     public abstract class OAuth2Client : IClient
     {
-        private const string AccessTokenKey = "access_token";
-        private const string RefreshTokenKey = "refresh_token";
-        private const string ExpiresKey = "expires_in";
-        private const string TokenTypeKey = "token_type";
+        protected const string AccessTokenKey = "access_token";
+        protected const string RefreshTokenKey = "refresh_token";
+        protected const string ExpiresKey = "expires_in";
+        protected const string TokenTypeKey = "token_type";
 
-        private readonly IRequestFactory _factory;
+        protected readonly IRequestFactory _factory;
 
         /// <summary>
         /// Client configuration object.
@@ -58,7 +58,7 @@ namespace OAuth2.Client
         /// </summary>
         public DateTime ExpiresAt { get; private set; }
 
-        private string GrantType { get; set; }
+        protected string GrantType { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="OAuth2Client"/> class.
@@ -173,7 +173,7 @@ namespace OAuth2.Client
         /// </summary>
         protected abstract Endpoint UserInfoServiceEndpoint { get; }
 
-        private void CheckErrorAndSetState(NameValueCollection parameters)
+        protected void CheckErrorAndSetState(NameValueCollection parameters)
         {
             const string errorFieldName = "error";
             var error = parameters[errorFieldName];
@@ -189,7 +189,7 @@ namespace OAuth2.Client
         /// Issues query for access token and parses response.
         /// </summary>
         /// <param name="parameters">Callback request payload (parameters).</param>
-        private void QueryAccessToken(NameValueCollection parameters)
+        protected void QueryAccessToken(NameValueCollection parameters)
         {
             var client = _factory.CreateClient(AccessTokenServiceEndpoint);
             var request = _factory.CreateRequest(AccessTokenServiceEndpoint, Method.POST);
