@@ -25,6 +25,7 @@ namespace OAuth2
         public AuthorizationRoot() : 
             this(new ConfigurationManager(), "oauth2", new RequestFactory())
         {
+            _clientsTypes = new List<Type>();
         }
 
         /// <summary>
@@ -51,9 +52,8 @@ namespace OAuth2
         {
             get
             {
-                var types = this.GetClientTypes().ToList();
                 Func<ClientConfiguration, Type> getType = 
-                    configuration => types.FirstOrDefault(x => x.Name == configuration.ClientTypeName);
+                    configuration => _clientsTypes.FirstOrDefault(x => x.Name == configuration.ClientTypeName);
 
                 return
                     _configurationSection.Services.AsEnumerable()
@@ -65,11 +65,29 @@ namespace OAuth2
         }
 
         /// <summary>
-        /// Returns collection of client types to consider
-        /// </summary>        
-        protected virtual IEnumerable<Type> GetClientTypes()
+        /// List of available clients' types
+        /// </summary>
+        protected List<Type> _clientsTypes;
+
+        /// <summary>
+        /// Register client type
+        /// </summary>
+        public void RegisterClient<TClient>()
+            where TClient : IClient
         {
-          return AppDomain.CurrentDomain.GetAssemblies().SelectMany(s => s.GetTypes()).Where(p => typeof(IClient).IsAssignableFrom(p));
+            _clientsTypes.Add(typeof(TClient));
+        }
+
+        /// <summary>
+        /// Unregister client type
+        /// </summary>
+        public void UnregisterClient<TClient>()
+            where TClient : IClient
+        {
+            //if (_clientsTypes.Contains(typeof(TClient)))
+            //{
+                _clientsTypes.Remove(typeof(TClient));
+            //}
         }
     }
 }
